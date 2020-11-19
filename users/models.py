@@ -8,6 +8,12 @@ class Profile(models.Model):
   user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
   tipo = models.SmallIntegerField(choices=[(1, 'Administrador'), (2, 'Profesor'), (3, 'Estudiante')])
 
+  def __str__(self):
+        return self.get_full_name()
+
+  def get_full_name(self):
+        return '{} {}'.format(self.user.first_name, self.user.last_name)
+
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
   if created:

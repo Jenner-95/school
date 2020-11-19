@@ -30,3 +30,21 @@ class UserProfileSerializer(serializers.ModelSerializer):
             "email",
             "date_joined",
         ]
+
+
+class TeacherSerializer(serializers.ModelSerializer):
+    profile = ProfileSerializer()
+    class Meta:
+        model = User
+        fields = [
+            "first_name",
+            "last_name",
+            "profile",
+        ]
+
+class StudentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = [
+            "username",
+        ]
